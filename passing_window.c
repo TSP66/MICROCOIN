@@ -72,8 +72,8 @@ int stopper = 0;
        //char * d1 = buffer;
      if ( (char *) strstr((const char *) string, "verify") != (char) 0) 
 {
-  puts("verifying");
-  int n_of_zeros = verify(buffer);
+    puts("verifying");
+    int n_of_zeros = verify(buffer);
     putchar((char)(n_of_zeros + 48));
     puts("");
     stopper = 1;

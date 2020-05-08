@@ -36,7 +36,7 @@ void send_data(char data){
     fprintf(hash, "%c", data);
     fclose(hash);
 }
-void run_get_hash_of(char * info, int no0){
+int run_get_hash_of(char * info){
     int returner = 0;
     FILE * transfer;
     system("python3 miner_good.py");
@@ -76,10 +76,8 @@ void run_get_hash_of(char * info, int no0){
      
      
 */
-    puts("ZEROS: ");
-    printf("%d", returner);
     puts("");
     puts(data);
-    no0 = returner;
     info = data;
+    return(returner);
 }

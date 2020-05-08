@@ -40,7 +40,7 @@ char n0 =  *message;
 
     }
      
-     run_get_hash_of(output, returner);
+     returner = run_get_hash_of(output);
      puts(output);
      
      //char *data_string_ah = (char*) malloc(48 * sizeof(char));
@@ -62,7 +62,7 @@ char n0 =  *message;
      
  }
         printf("%d", returner);
-return returner;
+        return returner;
   //puts("verfied");
 }
 
