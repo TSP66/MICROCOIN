@@ -50,15 +50,17 @@ void run_get_hash_of(char * info, int no0){
     for(int b = 0; b < 32; b++){
          ch = fgetc(transfer);
          data[i] = ch;
+      //  printf("%c", ch);
+     //   puts("");
         if((int)ch == 48){
-            puts("YES");
-            
             if(prev == 0){
-                returner = i;
+                returner++;
             }
         }
         else prev = 1;
 
+        
+        
          i++;
         
 
