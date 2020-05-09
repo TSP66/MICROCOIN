@@ -1,4 +1,6 @@
-#include <unistd.h> 
+//passing_window.c
+
+#include <unistd.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <sys/socket.h> 
@@ -9,6 +11,8 @@
 #include "hasher.h"
 #include "BASIC_FUNCTIONS.h"
 
+
+//verify-1-hellowmskmk|  - Command and hash used to test, should return 1 zero
 
 
 char line[1024];
@@ -65,18 +69,23 @@ int stopper = 0;
       const char *  string = buffer;
      // puts("deEbug");
       if(stopper == 1){
-          stopper = 0;
+        stopper = 0;
       }
       else {
 
        //char * d1 = buffer;
      if ( (char *) strstr((const char *) string, "verify") != (char) 0) 
 {
+    char * d = buffer+7;
+    int difficulty = (int) *d;
+    difficulty = difficulty - 48;
+    
     puts("verifying");
     int n_of_zeros = verify(buffer);
-    putchar((char)(n_of_zeros + 48));
-    puts("");
-    stopper = 1;
+    
+   if(difficulty == n_of_zeros) puts("confirmed");
+   else puts("not confirmed: not enough zeros");
+    
 } 
 
 else if ( (char *) strstr((const char *) string, "test") != (char) 0)
