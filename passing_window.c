@@ -22,7 +22,11 @@ char * i = "hello";
 int main(){
     
 
-puts("started");
+   puts("Started");
+   puts("Welcome to MicroCoin terminal interaface. Waiting to connect to other node ...");
+   puts("Commands: ");
+    puts("Verify - Usage: verify-difficulty-hash");
+    puts("Test - Usage: test")
 
    int status = boot();
    if(status == 1){
@@ -31,7 +35,7 @@ puts("started");
    while(&free){       
        clear();
        for(int i = 0; i < 1024; i++) line[i] = '\040';
-       puts("Data to send (n to continue): ");
+       puts("Commands (to other nodes): ");
        scanf("%s", line);
        //char * data = line;
         // char * d2 = line;
