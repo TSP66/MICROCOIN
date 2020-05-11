@@ -104,15 +104,26 @@ void SEND(){
         send(sock , message , strlen(message) , 0 );
 
 }
+
+int check(void);
+
 void READ(){
         clear();
         int valread;
-    while(Data[0] == '\040'){
+    while(check() == 0){
         valread = read(sock , Data, 1024);
         buffer = Data;
     }
         
         
+}
+
+int check(){
+    int returner = 0;
+    for(int i = 0; i < 1024; i++){
+        if(Data[i] != '\040') returner = 1;
+    }
+    return returner;
 }
 
 int boot(){
