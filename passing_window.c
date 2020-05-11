@@ -22,11 +22,12 @@ char * i = "hello";
 int main(){
     
 
-   puts("Started");
-   puts("Welcome to MicroCoin terminal interaface. Waiting to connect to other node ...");
-   puts("Commands: ");
+   puts("Starting...");
+   puts("Welcome to MicroCoin terminal interaface. Waiting to connect to other node(s)...");
+   puts("Commands (global mode): ");
     puts("Verify - Usage: verify-difficulty-hash");
-    puts("Test - Usage: test")
+    puts("Test - Usage: test");
+    
 
    int status = boot();
    if(status == 1){
