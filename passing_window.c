@@ -27,6 +27,7 @@ int main(){
    puts("Commands (global mode): ");
     puts("Verify - Usage: verify-difficulty-hash");
     puts("Test - Usage: test");
+    puts("");
     
 
    int status = boot();
@@ -59,6 +60,7 @@ int main(){
 
 }
   if(status == 0){
+      puts("Connected as client, processes are automatic.");
   message = "c";
   SEND();
   wipe_sockets();
@@ -71,7 +73,7 @@ int stopper = 0;
      //  for(int i = 0; i < 1024; i++) buffer[i] = '\040';
 
        READ();
-      const char *  string = buffer;
+      const char * string = buffer;
      // puts("deEbug");
       if(stopper == 1){
         stopper = 0;

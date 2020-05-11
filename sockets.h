@@ -107,8 +107,10 @@ void SEND(){
 void READ(){
         clear();
         int valread;
+    while(Data[0] == '\040'){
         valread = read(sock , Data, 1024);
         buffer = Data;
+    }
         
         
 }
