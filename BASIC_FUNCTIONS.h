@@ -77,3 +77,7 @@ printf("added transation");
 void getChain(){
  printf("got chain");
 }
+
+void newBlock(){
+    
+}

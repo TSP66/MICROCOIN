@@ -111,6 +111,7 @@ void READ(){
         clear();
         int valread;
     while(check() == 0){
+        clear();
         valread = read(sock , Data, 1024);
     }
     //printf("Data: ");
@@ -124,7 +125,7 @@ void READ(){
 int check(){
     int returner = 0;
     for(int i = 0; i < 1024; i++){
-        if(Data[i] != '\000') {
+        if(Data[i] != '\040') {
             returner = 1;
             break;
         }
@@ -133,7 +134,7 @@ int check(){
 }
 
 int boot(){
- printf("Data: ");
+ //printf("Data: ");
 buffer = (char*) malloc(1024 * sizeof(char));
  int b = 0; 
  if(setup_as_client(PORT) == -1){
@@ -145,8 +146,8 @@ return b;
 
 void clear(){
    for(int i = 0; i < 1024; i++){
-   Data[i]  = '\000' ;
-   buffer[i] = '\000' ;
+   Data[i]  = '\040' ;
+   buffer[i] = '\040' ;
 }
 
 

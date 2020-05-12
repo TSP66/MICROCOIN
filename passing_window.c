@@ -1,4 +1,5 @@
 //passing_window.c
+//148 lines
 
 #include <unistd.h>
 #include <stdio.h>
@@ -35,9 +36,10 @@ int main(){
    if(status == 1){
 
    READ();
-   while(&free){       
+   while(&free){
+       //printf("Loading...");
        clear();
-       for(int i = 0; i < 1024; i++) line[i] = '\040';
+       for(int i = 0; i < 1024; i++) line[i] = '\000';
        puts("Commands (to other nodes): ");
        scanf("%s", line);
        //char * data = line;
@@ -68,13 +70,13 @@ int main(){
 int value = 0;
 int stopper = 0;
   while(1){
-      
+      printf("Loading...");
        clear();
        
      //  for(int i = 0; i < 1024; i++) buffer[i] = '\040';
 
        READ();
-      const char * string = buffer;
+      //const char * string = buffer;
      // puts("deEbug");
       if(stopper == 1){
         stopper = 0;
@@ -82,7 +84,7 @@ int stopper = 0;
       else {
 
        //char * d1 = buffer;
-     if ( (char *) strstr((const char *) string, "verify") != (char) 0) 
+     if ( (char *) strstr((const char *) buffer, "verify") != (char) 0)
 {
     char * d = buffer+7;
     int difficulty = (int) *d;
@@ -94,32 +96,38 @@ int stopper = 0;
    if(difficulty == n_of_zeros) puts("confirmed");
    else puts("not confirmed: not enough zeros");
     
+    clear();
+    
 } 
 
-else if ( (char *) strstr((const char *) string, "test") != (char) 0)
+else if ( (char *) strstr((const char *) buffer, "test") != (char) 0)
 {
    puts("Connected ");
    //clear();
     stopper = 1;
+    
+    clear();
    
 } 
 
-else if ( (char *) strstr((const char *) string, "quited") != (char) 0)
+else if ( (char *) strstr((const char *) buffer, "quited") != (char) 0)
 
 { 
   puts(" quitting ");
-  
-  break;
   value = 1;
+    clear();
+  break;
+ 
   //stopper = 1;
 } 
 
 else  {
 puts("Unkown command: ");
-puts(string);
+puts(buffer);
 puts("TESTING");
 puts(" ");
 stopper = 1;
+    clear();
 }
  
 if (value == 1){ break; }

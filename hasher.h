@@ -9,7 +9,7 @@ void get_hash_of(char * message, char * info){
    hash = fopen("US_TEXT.txt", "w+");
    fprintf(hash, "%s", message);
    fclose(hash);
-   system("python3 miner_good.py");
+   system("python3 verify.py");
    char ch;
    char data[32];
    transfer = fopen("transfer.txt", "r+");
