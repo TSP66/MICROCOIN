@@ -11,10 +11,10 @@
 #define PORT 8091
 
 void clear(void);
-
+char * buffer;
 char * message;
 
-char * buffer;
+//char buffer;
 char Data[1024] = {0}; //local
 int sock = 0;
  
@@ -112,8 +112,11 @@ void READ(){
         int valread;
     while(check() == 0){
         valread = read(sock , Data, 1024);
-        buffer = Data;
     }
+    //printf("Data: ");
+    //printf("%s", Data);
+
+    buffer = Data;
         
         
 }
@@ -121,13 +124,17 @@ void READ(){
 int check(){
     int returner = 0;
     for(int i = 0; i < 1024; i++){
-        if(Data[i] != '\040') returner = 1;
+        if(Data[i] != '\000') {
+            returner = 1;
+            break;
+        }
     }
     return returner;
 }
 
 int boot(){
- buffer = (char*) malloc(1024 * sizeof(char)); 
+ printf("Data: ");
+buffer = (char*) malloc(1024 * sizeof(char));
  int b = 0; 
  if(setup_as_client(PORT) == -1){
  setup_as_server(PORT);
@@ -138,8 +145,8 @@ return b;
 
 void clear(){
    for(int i = 0; i < 1024; i++){
-   Data[i]  = '\040' ;
-   buffer[i] = '\040' ;
+   Data[i]  = '\000' ;
+   buffer[i] = '\000' ;
 }
 
 

@@ -25,8 +25,9 @@ int main(){
    puts("Starting...");
    puts("Welcome to MicroCoin terminal interaface. Waiting to connect to other node(s)...");
    puts("Commands (global mode): ");
-    puts("Verify - Usage: verify-difficulty-hash");
-    puts("Test - Usage: test");
+    puts("  Verify - Usage: verify-difficulty-hash");
+    puts("  Test - Usage: test");
+    puts("  Quit - Usage: quit");
     puts("");
     
 
