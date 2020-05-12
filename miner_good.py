@@ -71,6 +71,7 @@ def hash_until_N0(message, zeros):
         print(data)
         new_file = open("bitcoin.txt","a+")
         new_file.write(str(zeros)+info+"\n")
+        
  
         
                     
