@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include "rsa.h"
 #include "primes.h"
+#include "RSA_main.h"
 
-int main(){
+void setup(){
     init();
-    
 
-
-
-return 0;
 }
