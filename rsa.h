@@ -24,7 +24,7 @@ long prime2;
 #ifndef rsa_h
 #define rsa_h
 
-const int prime_set_size = 27;
+const int prime_set_size = 40;
 const int r_prime_set_size = prime_set_size*prime_set_size;
 int primeset[prime_set_size];
 int r_primeset[r_prime_set_size];

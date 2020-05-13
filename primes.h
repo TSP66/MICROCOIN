@@ -11,7 +11,7 @@
 #ifndef primes_h
 #define primes_h
 
-const int PRIMES = 28; //has to be more then 27
+const int PRIMES = 60; //has to be more then 27
 
 int primes[PRIMES];
 
