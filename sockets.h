@@ -131,7 +131,7 @@ void READ(){
 int check(){
     int returner = 0;
     for(int i = 0; i < 1024; i++){
-        if(Data[i] != '\040') {
+        if(Data[i] != '\000') {
             returner = 1;
             break;
         }
@@ -152,8 +152,8 @@ return b;
 
 void clear(){
    for(int i = 0; i < 1024; i++){
-   Data[i]  = '\040' ;
-   buffer[i] = '\040' ;
+   Data[i]  = '\000' ;
+   buffer[i] = '\000' ;
 }
 
 
