@@ -8,11 +8,17 @@
 #include <string.h> 
 #include <arpa/inet.h> 
 
-#define PORT 8091
+int PORT = 8080; //port, defualt 8080
+
+char * ip = "127.0.0.1"; // ip address
 
 void clear(void);
 char * buffer;
 char * message;
+
+//fda0:3e59:2ef8::6892:4d75:e33c:8d3d
+//14.2.157.137
+//10.1.1.209
 
 //char buffer;
 char Data[1024] = {0}; //local
@@ -85,7 +91,7 @@ int setup_as_client(int port)
 	serv_addr.sin_port = htons(port); 
 	
 	// Convert IPv4 and IPv6 addresses from text to binary form 
-	if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0) 
+	if(inet_pton(AF_INET, ip, &serv_addr.sin_addr)<=0)
 	{ 
 		printf("\nInvalid address/ Address not supported \n"); 
 		return -1; 
