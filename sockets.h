@@ -11,7 +11,7 @@
 int PORT = 8080; //port, defualt 8080
 
 char * ip = "127.0.0.1"; // ip address
-
+char * ip_address;
 void clear(void);
 char * buffer;
 char * message;
@@ -69,7 +69,9 @@ int setup_as_server(int port)
 	{ 
 		perror("accept"); 
 		exit(EXIT_FAILURE); 
-	} 
+	}
+    ip_address = inet_ntoa(address.sin_addr);
+    puts(ip_address);
 return 0;
 	
 } 

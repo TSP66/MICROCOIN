@@ -80,12 +80,13 @@ def run():
     FILE = open("US_TEXT.txt", "r", encoding="utf-8")
     data = FILE.readline()
     #print(str(data))
-    info = md2(data)
+    #info = md2(data)
     #print(info)
     FILE.close()
     
-    transfer_text = open("transfer.txt", "w")
-    transfer_text.write(str(info))
+    transfer_text = open("transfer.txt", "w", encoding="utf-8")
+    transfer_text.write(str(md2(data)))
+    blank = md2("helloworld") #Leave this line alone, it gives time to the above lines to prcess
     transfer_text.close()
      
 
