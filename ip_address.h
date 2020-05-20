@@ -21,5 +21,5 @@ int get_address(){
         //puts(str);
         i++;
     }
-    return 0;
+    return i;
 }

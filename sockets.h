@@ -85,7 +85,7 @@ int setup_as_client(int port)
 	 
 	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
 	{ 
-		printf("\n Socket creation error \n"); 
+		//printf("\n Socket creation error \n");
 		return -1; 
 	} 
 
@@ -95,7 +95,7 @@ int setup_as_client(int port)
 	// Convert IPv4 and IPv6 addresses from text to binary form 
 	if(inet_pton(AF_INET, ip, &serv_addr.sin_addr)<=0)
 	{ 
-		printf("\nInvalid address/ Address not supported \n"); 
+		//printf("\nInvalid address/ Address not supported \n");
 		return -1; 
 	} 
 
