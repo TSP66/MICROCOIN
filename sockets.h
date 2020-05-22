@@ -101,7 +101,7 @@ int setup_as_client(int port)
 
 	if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) 
 	{ 
-		printf("\n Setting up as server \n"); 
+		//printf("\n Setting up as server \n"); 
 		return -1; 
 	} 
 return 0;

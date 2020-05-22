@@ -1,4 +1,6 @@
 #include <stdio.h>
+//#include <stlib.h>
+#include <string.h>
 
 #define MAXCHAR 1000
 
@@ -12,14 +14,18 @@ struct CONNECTION{
 struct CONNECTION address[number_of_addresses];
 
 int get_address(){
-    char str[MAXCHAR];
+    char str[100];
+    char emt[100];
     FILE * ipaddresses = fopen("ip_addresses.txt", "r");
     int i = 0;
-    while(fgets(str, MAXCHAR, ipaddresses) != NULL){
+    while(fgets(str, sizeof(str), ipaddresses)){
+        
+       // puts(str);
         address[i].address = str;
         //printf("Address: ");
-        //puts(str);
+        //puts(address[i].address);
         i++;
     }
-    return i;
+    //printf("%d",i);
+    return (i-1);
 }

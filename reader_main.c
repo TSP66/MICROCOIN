@@ -5,19 +5,19 @@
 int main(){
     int f = 0;
     puts("Getting addresses");
-    int i = get_address();
+    int he = get_address();
     puts("Done... Connecting");
-    for(int d = 0; d < i; d++){
+    for(int d = 0; d < 1; d++){
 
         ip = address[d].address;
         puts("gotten address: ");
         puts(ip);
-        for(int c; c<100; c++){
-            if(setup_as_client((8000+c)) != -1) {
+       // for(int c; c<100; c++){
+            if(setup_as_client(8000) != -1) {
                 f = 1;
                 break;
             }
-        }
+        //}
         if(f == 1) break;
     }
 while(&free){
