@@ -10,7 +10,7 @@
 
 int PORT = 8080; //port, defualt 8080
 
-char * ip = "127.0.0.1"; // ip address
+char * ip = "112.213.34.190"; // ip address
 char * ip_address;
 void clear(void);
 char * buffer;

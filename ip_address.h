@@ -14,7 +14,7 @@ struct CONNECTION{
 struct CONNECTION address[number_of_addresses];
 
 int get_address(){
-    char str[100];
+    /*char str[100];
     char emt[100];
     FILE * ipaddresses = fopen("ip_addresses.txt", "r");
     int i = 0;
@@ -28,4 +28,8 @@ int get_address(){
     }
     //printf("%d",i);
     return (i-1);
+     */
+    address[0].address = "112.213.34.190";
+    
+    return 0;
 }
