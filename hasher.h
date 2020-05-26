@@ -65,6 +65,7 @@ int run_get_hash_of(char * info){
         
 
     }
+    fclose(transfer);
     /*for(int i = 0;i<20;i++){
        
         if(data[i] != *zero){

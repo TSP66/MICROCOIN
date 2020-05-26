@@ -99,12 +99,3 @@ def run():
 def random_character():
     pass
 
-#hash_until_00("kihu085sgyhdys")
-'''
-for i in range(10000000000000000000000000000000000000000000000):
-    b = i + 100000000000000000
-    
-    hash_until_N0("bob8cody9689"+str(hex(b)), 7)
-
-'''
-
