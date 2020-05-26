@@ -20,7 +20,7 @@ def md2(string):
 counter = 0
 
 def build(text1, text2, text3, randomletter):
-    return(str(text1)+str(text2)+str(text3)+str(randomletter))
+    return(str(str(text1)+str(text2)+str(text3)+str(randomletter)))
 
 def Next():
     global counter
@@ -84,9 +84,11 @@ def run():
     #print(info)
     FILE.close()
     
-    transfer_text = open("transfer.txt", "w", encoding="utf-8")
+    transfer_text = open("transfer.txt", "w+", encoding="utf-8")
+    
+    #transfer_text = open("transfer.txt", "w+", encoding="utf-8")
     transfer_text.write(str(md2(data)))
-    blank = md2("helloworld") #Leave this line alone, it gives time to the above lines to prcess
+    blank = md2("helloworld") #Leave this line alone, it gives time to the above lines to process
     transfer_text.close()
      
 
