@@ -84,7 +84,7 @@ def run():
     #print(info)
     FILE.close()
     
-    transfer_text = open("transfer.txt", "w+", encoding="utf-8")
+    transfer_text = open("transfer_PythonC.txt", "w")
     
     #transfer_text = open("transfer.txt", "w+", encoding="utf-8")
     transfer_text.write(str(md2(data)))

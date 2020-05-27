@@ -14,7 +14,7 @@ void get_hash_of(char * message, char * info){
    char ch;
    char data[32];
     process(3);
-   transfer = fopen("transfer.txt", "r");
+   transfer = fopen("transfer_PythonC.txt", "r");
    int i = 0;
    for(int b = 0; b < 32; b++){
         ch = fgetc(transfer);
@@ -40,35 +40,42 @@ void send_data(char data){
 }
 int run_get_hash_of(char * info){
     int returner = 0;
-    FILE * transfer;
     system("python3 miner_good.py");
     char ch;
-    char data[32];
+    char ata[32];
     char zero = (char) 48;
-    //process(3);
+    process(3);
+    //puts("hello");
     //char *ZERO = *zero
     //puts("opening file");
-    transfer = fopen("transfer.txt", "r+");
-    int i = 0;
+    FILE *transfer = fopen("transfer_PythonC.txt", "r");
+    if(transfer == NULL) {
+         perror("Error in opening file");
+    }
+    
+    int gh = 0;
     int prev = 0;
     //puts("getting info");
+
     for(int b = 0; b < 32; b++){
-        //printf("%d", b);
-         ch = fgetc(transfer);
-         data[i] = ch;
-      //  printf("%c", ch);
+    
+        ch = fgetc(transfer);
+        ata[gh] = ch;
+           //  printf("%c", ch);
+        
+        
      //   puts("");
         if((int)ch == 48){
             if(prev == 0){
                 returner++;
             }
         }
-        else prev = 1;
-
+        else {
+           prev = 1;
+        }
         
-        
-         i++;
-        
+        gh++;
+       
 
     }
     puts("Gotten info");
@@ -85,8 +92,8 @@ int run_get_hash_of(char * info){
      
 */
     puts("");
-    puts(data);
-    info = data;
+    puts(ata);
+    info = ata;
     return(returner);
 }
 void process(int time){
