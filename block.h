@@ -1,4 +1,6 @@
 
+
+
 struct block{
 
       int difficulty;
@@ -12,4 +14,5 @@ struct block{
 
       
 }
+void write_block(void);
 
