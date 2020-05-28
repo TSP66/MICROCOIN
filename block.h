@@ -1,4 +1,6 @@
-
+int get_block_version(){
+    return 1;
+}
 
 
 struct block{
