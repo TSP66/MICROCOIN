@@ -10,6 +10,7 @@ void get_hash_of(char * message, char * info){
    hash = fopen("US_TEXT.txt", "w+");
    fprintf(hash, "%s", message);
    fclose(hash);
+    puts("coming from get_hash_of");
    system("python3 verify.py");
    char ch;
    char data[32];
@@ -22,6 +23,7 @@ void get_hash_of(char * message, char * info){
         i++;
    }
  info = data;
+    fclose(transfer);
 
 }
 void clear_data(){
@@ -41,10 +43,13 @@ void send_data(char data){
 int run_get_hash_of(char * info){
     int returner = 0;
     system("python3 miner_good.py");
+    
     char ch;
     char ata[32];
+      puts("coming from run_get_hash_of");
     char zero = (char) 48;
-    process(3);
+    process(1);
+    system("sync; sync; sync; sync; sync");
     //puts("hello");
     //char *ZERO = *zero
     //puts("opening file");
@@ -80,6 +85,7 @@ int run_get_hash_of(char * info){
     }
     puts("Gotten info");
     fclose(transfer);
+    puts("Closen text file");
     /*for(int i = 0;i<20;i++){
        
         if(data[i] != *zero){

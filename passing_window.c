@@ -1,5 +1,5 @@
 //passing_window.c
-//148 lines
+//151 lines
 
 #include <unistd.h>
 #include <stdio.h>
@@ -70,7 +70,7 @@ int main(){
 int value = 0;
 int stopper = 0;
   while(1){
-      printf("Loading...");
+      puts("Loading...");
        clear();
        
      //  for(int i = 0; i < 1024; i++) buffer[i] = '\040';
