@@ -1,9 +1,12 @@
 #include <stdlib.h> 
 #include <stdio.h> 
 #include <string.h>
+#include "sockets_local.h"
 
 void process(int);
 
+char hashchars[48];
+int number_of_hash_chars = 0;
 void get_hash_of(char * message, char * info){
    FILE * hash;
    FILE * transfer;
@@ -15,7 +18,7 @@ void get_hash_of(char * message, char * info){
    char ch;
    char data[32];
     process(3);
-   transfer = fopen("transfer_PythonC.txt", "r");
+   transfer = fopen("transfer_PtoC.txt", "r");
    int i = 0;
    for(int b = 0; b < 32; b++){
         ch = fgetc(transfer);
@@ -35,36 +38,53 @@ void clear_data(){
 
 
 void send_data(char data){
-    FILE * hash;
+    hashchars[number_of_hash_chars] = data;
+    number_of_hash_chars++;
+    /*FILE * hash;
     hash = fopen("US_TEXT.txt", "a+");
     fprintf(hash, "%c", data);
     fclose(hash);
+     */
+    
+}
+void clear_hashchar(){
+    for(int gh = 0; gh<42; gh++){
+        hashchars[gh] = '\000';
+    }
+    number_of_hash_chars = 0;
 }
 int run_get_hash_of(char * info){
     int returner = 0;
-    system("python3 miner_good.py");
+    //system(osascript -e 'tell app "Terminal" to do script "python3 Desktop/MICROCOIN/verify.py"');
+    puts("start verify.py");
+    setup_as_server(LOCAL_PORT);
+    clear_hashchar();
+    local_message = hashchars;
+    LSEND();
     
+   
     char ch;
     char ata[32];
       puts("coming from run_get_hash_of");
     char zero = (char) 48;
     process(1);
-    system("sync; sync; sync; sync; sync");
+    //system("sync; sync; sync; sync; sync");
     //puts("hello");
     //char *ZERO = *zero
     //puts("opening file");
-    FILE *transfer = fopen("transfer_PythonC.txt", "r");
+   /* FILE *transfer = fopen("transfer_PtoC.txt", "r");
     if(transfer == NULL) {
          perror("Error in opening file");
     }
-    
+    */
     int gh = 0;
     int prev = 0;
     //puts("getting info");
-
+    LREAD();
+    char * iata = local_buffer;
     for(int b = 0; b < 32; b++){
     
-        ch = fgetc(transfer);
+        ch = *(iata+b);
         ata[gh] = ch;
            //  printf("%c", ch);
         
@@ -83,9 +103,8 @@ int run_get_hash_of(char * info){
        
 
     }
+    LClose();
     puts("Gotten info");
-    fclose(transfer);
-    puts("Closen text file");
     /*for(int i = 0;i<20;i++){
        
         if(data[i] != *zero){
