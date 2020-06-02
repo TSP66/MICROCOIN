@@ -1,20 +1,24 @@
 #verify.py
 
 from miner_good import *
-import socket
-
-HOST = '127.0.0.1'  # The server's hostname or IP address
-PORT = 8079        # The port used by the server
 
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
-    print("Connected")
-    data = s.recv(1024)
-    print("Info recived")
-    hashi = bytearray(str(md2(str(data))), 'utf-8')
-    s.sendall(hashi)
-    print("Sent Data")
-    s.close()
+FILE = open("US_TEXT.txt", "r", encoding="utf-8")
+data = FILE.readline()
+print("Data:", data)
+FILE.close()
+
+for i in range(10):
+    blank = md2(str(i))
 
 
+
+file2 = open('transfer_PythonC.txt', 'w', encoding='utf-8')
+file3 = open('transfer_PtoC.txt', 'w', encoding='utf-8')
+file3.write(str(md2(data)))
+file3.close()
+file2.truncate(0)
+print("Hash:", str(md2(data)))
+file2.write(str(md2(data)))
+file2.close()
+blank = md2("helloworld") #Leave this line alone, it gives time to the above lines to process
