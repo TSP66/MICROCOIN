@@ -10,6 +10,26 @@
 
 int PORT = 8080; //port, defualt 8080
 
+struct connection{
+    int PORT;
+    char * ip;
+    char * ip_address;
+    char * buffer;
+    char * message;
+    char Data[1024];
+    int sock;
+    struct sockaddr_in address;
+    pthread_t thread;
+    
+
+}
+struct connection FIRST;
+void defualts_for_first{
+    FIRST.PORT = 8080;
+    FIRST.ip = "127.0.0.1";
+    FIRST.sock = 0
+}
+
 char * ip = "127.0.0.1"; // ip address "112.213.34.190"
 char * ip_address;
 void clear(void);
@@ -24,12 +44,11 @@ char * message;
 char Data[1024] = {0}; //local
 int sock = 0;
  
-int setup_as_server(int port) 
+int setup_as_server(int port, struct connection C)
 { 
-	int server_fd, valread; 
-	struct sockaddr_in address; 
+	int server_fd, valread;
 	int opt = 1; 
-	int addrlen = sizeof(address); 
+	int addrlen = sizeof(C.address);
 	
 	
 	
@@ -50,11 +69,11 @@ int setup_as_server(int port)
 */ 
 	address.sin_family = AF_INET; 
 	address.sin_addr.s_addr = INADDR_ANY; 
-	address.sin_port = htons( port ); 
+	address.sin_port = htons( C.port );
 	
 	// Forcefully attaching socket to the port 8080 
-	if (bind(server_fd, (struct sockaddr *)&address, 
-								sizeof(address))<0) 
+	if (bind(server_fd, (struct sockaddr *)&C.address,
+								sizeof(C.address))<0)
 	{ 
 		perror("bind failed"); 
 		exit(EXIT_FAILURE); 
@@ -64,42 +83,42 @@ int setup_as_server(int port)
 		perror("listen"); 
 		exit(EXIT_FAILURE); 
 	} 
-	if ((sock = accept(server_fd, (struct sockaddr *)&address, 
+	if ((C.sock = accept(server_fd, (struct sockaddr *)&address,
 					(socklen_t*)&addrlen))<0) 
 	{ 
 		perror("accept"); 
 		exit(EXIT_FAILURE); 
 	}
-    ip_address = inet_ntoa(address.sin_addr);
-    puts(ip_address);
+    C.ip_address = inet_ntoa(C.address.sin_addr);
+    puts(C.ip_address);
 return 0;
 	
 } 
 
 
 
-int setup_as_client(int port) 
+int setup_as_client(int port, struct connection C)
 { 
 	int valread; 
 	struct sockaddr_in serv_addr; 
 	 
-	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
+	if ((C.sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{ 
 		//printf("\n Socket creation error \n");
 		return -1; 
 	} 
 
 	serv_addr.sin_family = AF_INET; 
-	serv_addr.sin_port = htons(port); 
+	serv_addr.sin_port = htons(C.port);
 	
 	// Convert IPv4 and IPv6 addresses from text to binary form 
-	if(inet_pton(AF_INET, ip, &serv_addr.sin_addr)<=0)
+	if(inet_pton(AF_INET, C.ip, &serv_addr.sin_addr)<=0)
 	{ 
 		//printf("\nInvalid address/ Address not supported \n");
 		return -1; 
 	} 
 
-	if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) 
+	if (connect(C.sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
 	{ 
 		//printf("\n Setting up as server \n"); 
 		return -1; 
@@ -108,19 +127,19 @@ return 0;
 
 } 
 
-void SEND(){
-        send(sock , message , strlen(message) , 0 );
+void SEND(struct connection C){
+        send(C.sock , C.message , strlen(C.message) , 0 );
 
 }
 
 int check(void);
 
-void READ(){
+void READ(struct connection C){
         clear();
         int valread;
     while(check() == 0){
         clear();
-        valread = read(sock , Data, 1024);
+        valread = read(C.sock , C.Data, 1024);
     }
     //printf("Data: ");
     //printf("%s", Data);
@@ -141,26 +160,26 @@ int check(){
     return returner;
 }
 
-int boot(){
+int boot(struct connection C){
  //printf("Data: ");
-buffer = (char*) malloc(1024 * sizeof(char));
+C.buffer = (char*) malloc(1024 * sizeof(char));
  int b = 0; 
- if(setup_as_client(PORT) == -1){
- setup_as_server(PORT);
+ if(setup_as_client(C.PORT, C) == -1){
+ setup_as_server(C.PORT, C);
  b = 1;
 }
 return b;
 }
 
-void clear(){
+void clear(struct connection C){
    for(int i = 0; i < 1024; i++){
-   Data[i]  = '\000' ;
-   buffer[i] = '\000' ;
+   C.Data[i]  = '\000' ;
+   C.buffer[i] = '\000' ;
 }
 
 
 }
 
-void Close(){ close(sock); }
-void wipe_sockets(){ clear(); SEND(); }
+void Close(struct connection C){ close(C.sock); }
+void wipe_sockets(struct connection C){ clear(C); SEND(C); }
   
