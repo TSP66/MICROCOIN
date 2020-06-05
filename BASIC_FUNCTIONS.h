@@ -4,10 +4,12 @@
 #include <stdlib.h>
 #include <stdio.h> 
 #include <string.h>
+#include "sockets.h"
+
 
 char * output;
 
-int verify(char * message){ // returns number of zeors
+int verify(char * message, struct connection C){ // returns number of zeors
  //char * message = stuff;
  //char * str = message;
     int returner =0;
@@ -40,7 +42,7 @@ char n0 =  *message;
 
     }
      
-     returner = run_get_hash_of(output);
+     returner = run_get_hash_of(output, C);
      puts(output);
      
      //char *data_string_ah = (char*) malloc(48 * sizeof(char));

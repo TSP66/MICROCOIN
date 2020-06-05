@@ -22,27 +22,23 @@ struct connection{
     pthread_t thread;
     
 
-}
+};
 struct connection FIRST;
-void defualts_for_first{
+
+void defualts_for_first(){
     FIRST.PORT = 8080;
     FIRST.ip = "127.0.0.1";
-    FIRST.sock = 0
+    FIRST.sock = 0;
 }
 
-char * ip = "127.0.0.1"; // ip address "112.213.34.190"
-char * ip_address;
-void clear(void);
-char * buffer;
-char * message;
+
 
 //fda0:3e59:2ef8::6892:4d75:e33c:8d3d
 //14.2.157.137
 //10.1.1.209
 
 //char buffer;
-char Data[1024] = {0}; //local
-int sock = 0;
+
  
 int setup_as_server(int port, struct connection C)
 { 
@@ -67,9 +63,9 @@ int setup_as_server(int port, struct connection C)
 		exit(EXIT_FAILURE); 
 	}
 */ 
-	address.sin_family = AF_INET; 
-	address.sin_addr.s_addr = INADDR_ANY; 
-	address.sin_port = htons( C.port );
+	C.address.sin_family = AF_INET;
+	C.address.sin_addr.s_addr = INADDR_ANY;
+	C.address.sin_port = htons( C.PORT);
 	
 	// Forcefully attaching socket to the port 8080 
 	if (bind(server_fd, (struct sockaddr *)&C.address,
@@ -83,7 +79,7 @@ int setup_as_server(int port, struct connection C)
 		perror("listen"); 
 		exit(EXIT_FAILURE); 
 	} 
-	if ((C.sock = accept(server_fd, (struct sockaddr *)&address,
+	if ((C.sock = accept(server_fd, (struct sockaddr *)&C.address,
 					(socklen_t*)&addrlen))<0) 
 	{ 
 		perror("accept"); 
@@ -104,23 +100,23 @@ int setup_as_client(int port, struct connection C)
 	 
 	if ((C.sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{ 
-		//printf("\n Socket creation error \n");
+		printf("\n Socket creation error \n");
 		return -1; 
 	} 
 
 	serv_addr.sin_family = AF_INET; 
-	serv_addr.sin_port = htons(C.port);
+	serv_addr.sin_port = htons(C.PORT);
 	
 	// Convert IPv4 and IPv6 addresses from text to binary form 
 	if(inet_pton(AF_INET, C.ip, &serv_addr.sin_addr)<=0)
 	{ 
-		//printf("\nInvalid address/ Address not supported \n");
+		printf("\nInvalid address/ Address not supported \n");
 		return -1; 
 	} 
 
 	if (connect(C.sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
 	{ 
-		//printf("\n Setting up as server \n"); 
+		printf("\n Setting up as server \n");
 		return -1; 
 	} 
 return 0;
@@ -135,10 +131,10 @@ void SEND(struct connection C){
 int check(void);
 
 void READ(struct connection C){
-        clear();
+        clear(C);
         int valread;
     while(check() == 0){
-        clear();
+        clear(C);
         valread = read(C.sock , C.Data, 1024);
     }
     //printf("Data: ");

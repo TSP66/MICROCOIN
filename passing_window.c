@@ -6,26 +6,22 @@
 #include <ctype.h>
 #include <sys/socket.h> 
 #include <stdlib.h> 
-#include <netinet/in.h> 
+#include <netinet/in.h>
+#include <pthread.h>
 #include <string.h> 
 #include "sockets.h"
 #include "hasher.h"
 #include "BASIC_FUNCTIONS.h"
 
-
+void * inerface(void *);
 //verify-1-hellowmskmk|  - Command and hash used to test, should return 1 zero
-const int MAX_number_of_connections = 10;
+const int MAX_number_of_connections = 1;
 int number_of_sockets = 0;
 int socket_number = 0;
 char line[1024];
 char information[100];
 char * i = "hello";
 struct connection SOCKETS[MAX_number_of_connections];
-
-void OVERRIDEBOOT(){
-    boot(SOCKETS[number_of_sockets]);
-    number_of_sockets++;
-}
 
 int main(){
 
@@ -34,14 +30,20 @@ int main(){
    for(int i = 0; i < MAX_number_of_connections; i++){
    SOCKETS[i].PORT = 8080;
    SOCKETS[i].ip = "127.0.0.1";
-   SOCKETS[i].sock = 0
+       SOCKETS[i].sock = 0;
        }
     for(int i = 0; i < MAX_number_of_connections; i++){
-        
+     pthread_create( &SOCKETS[i].thread, NULL , inerface , NULL);
+        puts("Creating Threads");
     }
-    defualts_for_first();
-   int status = boot();
-    inerface(status);
+    //defualts_for_first();
+   //int status = boot();
+  for(int i = 0; i < MAX_number_of_connections; i++){
+      puts("Starting Threads");
+      pthread_join(SOCKETS[i].thread, NULL);
+  }
+    
+    
     
 }
     
@@ -55,10 +57,11 @@ int main(){
             puts("  Test - Usage: test");
             puts("  Quit - Usage: quit");
             puts("");
-           READ();
+             
+           READ(SOCKETS[socket_number]);
            while(&free){
                //printf("Loading...");
-               clear();
+               clear(SOCKETS[socket_number]);
                for(int i = 0; i < 1024; i++) line[i] = '\000';
                puts("Commands (to other nodes): ");
                scanf("%s", line);
@@ -67,15 +70,15 @@ int main(){
                if ( (char *) strstr((const char *) line, "quit") != (char) 0)
         { puts("quitting");
           message = "quited";
-          SEND();
-          Close();
+          SEND(SOCKETS[socket_number]);
+          Close(SOCKETS[socket_number]);
           break;
           
         }
               //printf("debug");
                message = line;
-               SEND();
-               wipe_sockets();
+               SEND(SOCKETS[socket_number]);
+               wipe_sockets(SOCKETS[socket_number]);
                
 
            }
@@ -84,18 +87,19 @@ int main(){
         }
           if(status == 0){
               puts("Connected as client, processes are automatic.");
-          message = "c";
-          SEND();
-          wipe_sockets();
+              
+          SOCKETS[socket_number].message = "c";
+          SEND(SOCKETS[socket_number]);
+          wipe_sockets(SOCKETS[socket_number]);
         int value = 0;
         int stopper = 0;
           while(1){
               puts("Loading...");
-               clear();
+               clear(SOCKETS[socket_number]);
                
              //  for(int i = 0; i < 1024; i++) buffer[i] = '\040';
 
-               READ();
+               READ(SOCKETS[socket_number]);
               //const char * string = buffer;
              // puts("deEbug");
               if(stopper == 1){
@@ -111,12 +115,12 @@ int main(){
             difficulty = difficulty - 48;
             
             puts("verifying");
-            int n_of_zeros = verify(buffer);
+            int n_of_zeros = verify(buffer, SOCKETS[socket_number]);
             
            if(difficulty == n_of_zeros) puts("confirmed");
            else puts("not confirmed: not enough zeros");
             
-            clear();
+            clear(SOCKETS[socket_number]);
             
         }
 
@@ -126,7 +130,7 @@ int main(){
            //clear();
             stopper = 1;
             
-            clear();
+            clear(SOCKETS[socket_number]);
            
         }
 
@@ -135,7 +139,7 @@ int main(){
         {
           puts(" quitting ");
           value = 1;
-            clear();
+            clear(SOCKETS[socket_number]);
           break;
          
           //stopper = 1;
@@ -147,7 +151,7 @@ int main(){
         puts("TESTING");
         puts(" ");
         stopper = 1;
-            clear();
+            clear(SOCKETS[socket_number]);
         }
          
         if (value == 1){ break; }
@@ -155,20 +159,19 @@ int main(){
               
               // printf("%s", information);
 
-        clear();
+        clear(SOCKETS[socket_number]);
                
               }
-        wipe_sockets();
+        wipe_sockets(SOCKETS[socket_number]);
                
             
            }
 
 
           }
-           Close();
+           Close(SOCKETS[socket_number]);
            return 0;
 
         }
 
-    }
 

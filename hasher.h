@@ -2,13 +2,15 @@
 #include <stdio.h> 
 #include <string.h>
 
+#include "md5.h"
+
 void process(int);
 
-void get_hash_of(char * message, char * info){
+void get_hash_of(char * message, char * info, struct connection C){
    FILE * hash;
    FILE * transfer;
    hash = fopen("US_TEXT.txt", "w+");
-   fprintf(hash, "%s", message);
+   fprintf(hash, "%s", C.message);
    fclose(hash);
     puts("coming from get_hash_of");
    system("python3 verify.py");
@@ -17,35 +19,33 @@ void get_hash_of(char * message, char * info){
     process(3);
    transfer = fopen("transfer_PtoC.txt", "r");
    int i = 0;
-   for(int b = 0; b < 32; b++){
+   /*for(int b = 0; b < 32; b++){
         ch = fgetc(transfer);
         data[i] = ch;
         i++;
    }
+    */
  info = data;
     fclose(transfer);
 
 }
 void clear_data(){
-    FILE * hash;
-    hash = fopen("US_TEXT.txt", "w+");
-    fclose(hash);
+    pointofGAFA = 0;
     
 }
 
+char global_array_forhash[32];
+int pointofGAFA = 0;
 
 void send_data(char data){
-    FILE * hash;
-    hash = fopen("US_TEXT.txt", "a+");
-    fprintf(hash, "%c", data);
-    fclose(hash);
+    global_array_forhash[pointofGAFA] = data;
+    pointofGAFA++;
 }
-int run_get_hash_of(char * info){
+int run_get_hash_of(char * info, struct connection C){
     int returner = 0;
     //system("python3 miner_good.py");
     
     char ch;
-    char ata[32];
     //  puts("coming from run_get_hash_of");
     char zero = (char) 48;
     process(1);
@@ -61,11 +61,11 @@ int run_get_hash_of(char * info){
     int gh = 0;
     int prev = 0;
     //puts("getting info");
-    ata = hash(message);
+    char *ata = (char *) hash(message);
     for(int b = 0; b < 32; b++){
     
         
-        ch = ata[32];
+        ch = ata[gh];
            //  printf("%c", ch);
         
         

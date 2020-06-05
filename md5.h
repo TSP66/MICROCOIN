@@ -38,13 +38,6 @@ char *md5(const char *str, int length) {
     return out;
 }
 
-    int main(int argc, char **argv) {
-        
-        char *output = str2md5("hello", strlen("hello"));
-        printf("%s\n", output);
-        free(output);
-        return 0;
-    }
 const char *hash(char * input){
     char *output = md5("hello", strlen("hello"));
     printf("%s\n", output);
