@@ -1,4 +1,5 @@
 //md5.h
+//48 lines
 
 #include <stdio.h>
 #include <stdlib.h>

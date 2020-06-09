@@ -1,4 +1,6 @@
-#include <stdlib.h> 
+//hasher.h
+//116 lines
+#include <stdlib.h>
 #include <stdio.h> 
 #include <string.h>
 
