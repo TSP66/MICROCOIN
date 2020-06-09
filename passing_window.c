@@ -13,10 +13,10 @@
 #include "hasher.h"
 #include "BASIC_FUNCTIONS.h"
 
-void * inerface(void *);
+void inerface(void);
 //verify-1-hellowmskmk|  - Command and hash used to test, should return 1 zero
 const int MAX_number_of_connections = 1;
-int number_of_sockets = 0;
+int number_of_sockets = 1;
 int socket_number = 0;
 char line[1024];
 char information[100];
@@ -32,7 +32,7 @@ int main(){
    SOCKETS[i].ip = "127.0.0.1";
        SOCKETS[i].sock = 0;
        }
-    for(int i = 0; i < MAX_number_of_connections; i++){
+  /*  for(int i = 0; i < MAX_number_of_connections; i++){
      pthread_create( &SOCKETS[i].thread, NULL , inerface , NULL);
         puts("Creating Threads");
     }
@@ -43,12 +43,14 @@ int main(){
       pthread_join(SOCKETS[i].thread, NULL);
   }
     
-    
+   */
+    inerface();
+    return 0;
     
 }
     
-    void * inerface(void *vargp){
-        int status = boot(SOCKETS[number_of_sockets]);
+    void inerface(){ // void *inerface(void *vargp);
+        int status = boot(SOCKETS[socket_number]);
         number_of_sockets++;
          if(status == 1){
            puts("Welcome to MicroCoin terminal interaface. Waiting to connect to other node(s)...");
@@ -59,6 +61,7 @@ int main(){
             puts("");
              
            READ(SOCKETS[socket_number]);
+          //   puts("reading");
            while(&free){
                //printf("Loading...");
                clear(SOCKETS[socket_number]);
@@ -69,14 +72,14 @@ int main(){
                 // char * d2 = line;
                if ( (char *) strstr((const char *) line, "quit") != (char) 0)
         { puts("quitting");
-          message = "quited";
+          SOCKETS[socket_number].message = "quited";
           SEND(SOCKETS[socket_number]);
           Close(SOCKETS[socket_number]);
           break;
           
         }
               //printf("debug");
-               message = line;
+               SOCKETS[socket_number].message = line;
                SEND(SOCKETS[socket_number]);
                wipe_sockets(SOCKETS[socket_number]);
                
@@ -90,7 +93,7 @@ int main(){
               
           SOCKETS[socket_number].message = "c";
           SEND(SOCKETS[socket_number]);
-          wipe_sockets(SOCKETS[socket_number]);
+          //wipe_sockets(SOCKETS[socket_number]);
         int value = 0;
         int stopper = 0;
           while(1){
@@ -108,14 +111,14 @@ int main(){
               else {
 
                //char * d1 = buffer;
-             if ( (char *) strstr((const char *) buffer, "verify") != (char) 0)
+             if ( (char *) strstr((const char *) SOCKETS[socket_number].buffer, "verify") != (char) 0)
         {
-            char * d = buffer+7;
+            char * d = SOCKETS[socket_number].buffer+7;
             int difficulty = (int) *d;
             difficulty = difficulty - 48;
             
             puts("verifying");
-            int n_of_zeros = verify(buffer, SOCKETS[socket_number]);
+            int n_of_zeros = verify(SOCKETS[socket_number].buffer, SOCKETS[socket_number]);
             
            if(difficulty == n_of_zeros) puts("confirmed");
            else puts("not confirmed: not enough zeros");
@@ -124,7 +127,7 @@ int main(){
             
         }
 
-        else if ( (char *) strstr((const char *) buffer, "test") != (char) 0)
+        else if ( (char *) strstr((const char *) SOCKETS[socket_number].buffer, "test") != (char) 0)
         {
            puts("Connected ");
            //clear();
@@ -134,7 +137,7 @@ int main(){
            
         }
 
-        else if ( (char *) strstr((const char *) buffer, "quited") != (char) 0)
+        else if ( (char *) strstr((const char *) SOCKETS[socket_number].buffer, "quited") != (char) 0)
 
         {
           puts(" quitting ");
@@ -147,7 +150,7 @@ int main(){
 
         else  {
         puts("Unkown command: ");
-        puts(buffer);
+        puts(SOCKETS[socket_number].buffer);
         puts("TESTING");
         puts(" ");
         stopper = 1;
@@ -170,7 +173,7 @@ int main(){
 
           }
            Close(SOCKETS[socket_number]);
-           return 0;
+        //return 0;
 
         }
 

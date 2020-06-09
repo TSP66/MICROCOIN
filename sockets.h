@@ -31,7 +31,7 @@ void defualts_for_first(){
     FIRST.sock = 0;
 }
 
-
+void clear(struct connection);
 
 //fda0:3e59:2ef8::6892:4d75:e33c:8d3d
 //14.2.157.137
@@ -128,27 +128,27 @@ void SEND(struct connection C){
 
 }
 
-int check(void);
+int check(struct connection);
 
 void READ(struct connection C){
         clear(C);
         int valread;
-    while(check() == 0){
+    while(check(C) == 0){
         clear(C);
         valread = read(C.sock , C.Data, 1024);
     }
     //printf("Data: ");
     //printf("%s", Data);
 
-    buffer = Data;
+    C.buffer = C.Data;
         
         
 }
 
-int check(){
+int check(struct connection C){
     int returner = 0;
     for(int i = 0; i < 1024; i++){
-        if(Data[i] != '\000') {
+        if(C.Data[i] != '\000') {
             returner = 1;
             break;
         }

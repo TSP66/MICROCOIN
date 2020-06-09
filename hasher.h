@@ -29,14 +29,15 @@ void get_hash_of(char * message, char * info, struct connection C){
     fclose(transfer);
 
 }
-void clear_data(){
-    pointofGAFA = 0;
-    
-}
+
 
 char global_array_forhash[32];
 int pointofGAFA = 0;
 
+void clear_data(){
+    pointofGAFA = 0;
+    
+}
 void send_data(char data){
     global_array_forhash[pointofGAFA] = data;
     pointofGAFA++;
@@ -61,7 +62,7 @@ int run_get_hash_of(char * info, struct connection C){
     int gh = 0;
     int prev = 0;
     //puts("getting info");
-    char *ata = (char *) hash(message);
+    char *ata = (char *) hash(C.message);
     for(int b = 0; b < 32; b++){
     
         
