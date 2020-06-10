@@ -44,7 +44,7 @@ void send_data(char data){
     global_array_forhash[pointofGAFA] = data;
     pointofGAFA++;
 }
-int run_get_hash_of(char * info, struct connection C){
+int run_get_hash_of(char * info){
     int returner = 0;
     //system("python3 miner_good.py");
     
@@ -64,7 +64,7 @@ int run_get_hash_of(char * info, struct connection C){
     int gh = 0;
     int prev = 0;
     //puts("getting info");
-    char *ata = (char *) hash(C.message);
+    char *ata = (char *) hash(info);
     for(int b = 0; b < 32; b++){
     
         

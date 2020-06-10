@@ -49,7 +49,7 @@ int main(){
     
 }
     
-    void inerface(){ // void *inerface(void *vargp);
+    void * inerface(){ // void *inerface(void *vargp);
         int status = boot(SOCKETS[socket_number]);
         number_of_sockets++;
          if(status == 1){

@@ -9,7 +9,7 @@
 
 char * output;
 
-int verify(char * message, struct connection C){ // returns number of zeors
+int verify(char * message){ // returns number of zeors
  //char * message = stuff;
  //char * str = message;
     int returner =0;
@@ -42,7 +42,7 @@ char n0 =  *message;
 
     }
      
-     returner = run_get_hash_of(output, C);
+     returner = run_get_hash_of(output);
      puts(output);
      
      //char *data_string_ah = (char*) malloc(48 * sizeof(char));
@@ -73,6 +73,7 @@ printf("voted");
 }
 
 void addTransaction(){
+
 printf("added transation");
 }
 
