@@ -181,14 +181,14 @@ int main(int argc , char *argv[])
 				{
 					//buffer[valread] = '\0';
                     char * DATA = buffer;
-                    if ( (char *) strstr((const char *) DATA, "verify") != (char) 0)
+                   if ( (char *) strstr((const char *) DATA, "verify") != (char) 0)
                            {
                                char * d = DATA+7;
                                int difficulty = (int) *d;
                                difficulty = difficulty - 48;
                                
                                puts("verifying");
-                               int n_of_zeros = verify(DATA, SOCKETS[socket_number]);
+                               int n_of_zeros = verify(DATA);
                                
                               if(difficulty == n_of_zeros) puts("confirmed");
                               else puts("not confirmed: not enough zeros");
@@ -198,7 +198,7 @@ int main(int argc , char *argv[])
                                
                            }
 
-					//send(sd , buffer , strlen(buffer) , 0 );
+					//send(sd , buffer , strlen(buffer) , 0 );*/
 				} 
 			} 
 		} 
