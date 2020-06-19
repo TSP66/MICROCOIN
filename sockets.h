@@ -94,33 +94,35 @@ return 0;
 
 
 
-int setup_as_client(int port, struct connection C)
-{ 
-	int valread; 
+int setup_as_client(int port, char * ip)
+{
+	int valread;
+    int sock = 0;
 	struct sockaddr_in serv_addr; 
 	 
-	if ((C.sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{ 
 		printf("\n Socket creation error \n");
 		return -1; 
 	} 
 
 	serv_addr.sin_family = AF_INET; 
-	serv_addr.sin_port = htons(C.PORT);
+	serv_addr.sin_port = htons(port);
 	
 	// Convert IPv4 and IPv6 addresses from text to binary form 
-	if(inet_pton(AF_INET, C.ip, &serv_addr.sin_addr)<=0)
+	if(inet_pton(AF_INET, ip, &serv_addr.sin_addr)<=0)
 	{ 
 		printf("\nInvalid address/ Address not supported \n");
 		return -1; 
 	} 
 
-	if (connect(C.sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+	if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
 	{ 
-		printf("\n Setting up as server \n");
+		//printf("\n Setting up as server \n");
 		return -1; 
-	} 
-return 0;
+	}
+ 
+return sock;
 
 } 
 
@@ -160,8 +162,9 @@ int check(struct connection C){
 int boot(struct connection C){
  //printf("Data: ");
 C.buffer = (char*) malloc(1024 * sizeof(char));
- int b = 0; 
- if(setup_as_client(C.PORT, C) == -1){
+ int b = 0;
+ C.sock = setup_as_client(C.PORT, C.ip);
+ if(C.sock == -1){
  setup_as_server(C.PORT, C);
  b = 1;
 }

@@ -1,6 +1,6 @@
 //basic_functions.h
 //85 lines
-
+#include "hasher.h"
 #include <stdlib.h>
 #include <stdio.h> 
 #include <string.h>
@@ -29,7 +29,7 @@ char n0 =  *message;
     char * ENDCHAR = "|";
    // char * ENDCHAR2 = " ";
     char * zero = "0";
-    clear_data();
+    //clear_data();
      int pd = 0;
      int zero_counter = 0;
     for(int i = 9;i<66;i++){

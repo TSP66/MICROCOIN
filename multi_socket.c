@@ -10,7 +10,7 @@
 #include <sys/socket.h> 
 #include <netinet/in.h> 
 #include <sys/time.h> //FD_SET, FD_ISSET, FD_ZERO macros
-#include "BASIC_FUNCTIONS.h"
+//#include "BASIC_FUNCTIONS.h"
 	
 #define TRUE 1 
 #define FALSE 0 
@@ -181,7 +181,7 @@ int main(int argc , char *argv[])
 				{
 					//buffer[valread] = '\0';
                     char * DATA = buffer;
-                   if ( (char *) strstr((const char *) DATA, "verify") != (char) 0)
+                  /* if ( (char *) strstr((const char *) DATA, "verify") != (char) 0)
                            {
                                char * d = DATA+7;
                                int difficulty = (int) *d;
