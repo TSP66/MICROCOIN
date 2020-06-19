@@ -7,36 +7,25 @@
 #include <stdlib.h>
  
 #include "ARRAYQueue.h"
- 
+ #define MAX 5
+ char array[MAX][20];
+
+int spot = 0;
 int main()
-{
-    const int SIZE = 5; /* queue's size */
-    int head, tail, element;
-    int queue[SIZE];
- 
-    init(&head,&tail);
- 
-    printf("--Enqueue elements--\n");
-    /* push elements into stack */
-    while(!full(tail,SIZE))
-    {
-        printf("Enter a number to enqueue:");
-        scanf("%d",&element);
- 
-        enqueue(queue,&tail,element);
- 
-        display(queue,head,tail);
+
+{   
+
+    while(spot < MAX){
+    printf("Enter a String:");
+    scanf("%s", array[spot]);
+    spot++;
+    
     }
-    printf("Queue is full\n\n");
- 
-    printf("--Dequeue elements --\n");
-    while(!empty(head,tail))
-    {
-        element = dequeue(queue,&head);
-        printf("dequeue element %d \n",element);
- 
-        display(queue,head,tail);
+    while(spot >= 0){
+    printf("%s", array[spot]);
+    puts("");
+    spot--;
+    
     }
-    printf("Queue is empty\n");
-    return 0;
+    
 }
