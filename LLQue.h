@@ -12,7 +12,10 @@
 
 struct node
 {
-    int data;
+    struct information{
+         int sock;
+         char * data;
+    }
     struct node *next;
 };
 typedef struct node node;
