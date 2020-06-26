@@ -182,6 +182,7 @@ int main(int argc , char *argv[])
 				{
 					//buffer[valread] = '\0';
                     char * DATA = buffer;
+                    
                   /* if ( (char *) strstr((const char *) DATA, "verify") != (char) 0)
                            {
                                char * d = DATA+7;

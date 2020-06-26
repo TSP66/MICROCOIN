@@ -1,0 +1,9 @@
+#include "STACK_PILE.h"
+
+struct stack s;
+
+int main(){
+    setup_stack(s);
+    push_to_stack(s, "hello");
+    printf("%s", pop_from_stack(s));
+}
