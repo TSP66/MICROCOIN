@@ -1,11 +1,11 @@
 //basic_functions.h
 //85 lines
-#include "hasher.h"
+
 #include <stdlib.h>
 #include <stdio.h> 
 #include <string.h>
 
-
+#include "hasher.h"
 
 char * output;
 

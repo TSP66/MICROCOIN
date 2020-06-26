@@ -10,7 +10,9 @@
 #include <sys/socket.h> 
 #include <netinet/in.h> 
 #include <sys/time.h> //FD_SET, FD_ISSET, FD_ZERO macros
-//#include "BASIC_FUNCTIONS.h"
+#include "sockets.h"
+#include "BASIC_FUNCTIONS.h"
+#include "STACK_PILE.h"
 
 	
 #define TRUE 1 
@@ -31,7 +33,8 @@ int main(int argc , char *argv[])
     int valread;
     int sd;
 	int max_sd; 
-	struct sockaddr_in address; 
+	struct sockaddr_in address;
+    struct stack_t *theStack = newStack();
 		
 	char buffer[1025]; //data buffer of 1K 
 		
@@ -182,8 +185,9 @@ int main(int argc , char *argv[])
 				{
 					//buffer[valread] = '\0';
                     char * DATA = buffer;
+                    push(theStack, DATA);
                     
-                  /* if ( (char *) strstr((const char *) DATA, "verify") != (char) 0)
+                   if ( (char *) strstr((const char *) DATA, "verify") != (char) 0)
                            {
                                char * d = DATA+7;
                                int difficulty = (int) *d;

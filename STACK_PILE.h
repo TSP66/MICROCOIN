@@ -100,7 +100,7 @@ void pop(struct stack_t *theStack)
 /**
  * Clear all elements from the stack
  */
-void clear (struct stack_t *theStack)
+void clear_Stack(struct stack_t *theStack)
 {
   while (theStack->head != NULL)
     pop(theStack);
@@ -111,7 +111,7 @@ void clear (struct stack_t *theStack)
  */
 void destroyStack(struct stack_t **theStack)
 {
-  clear(*theStack);
+  clear_Stack(*theStack);
   free(*theStack);
   *theStack = NULL;
 }
