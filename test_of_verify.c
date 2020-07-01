@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "hasher.h"
 #include "BASIC_FUNCTIONS.h"
 
 int main(){

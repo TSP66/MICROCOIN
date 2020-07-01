@@ -1,5 +1,5 @@
 //hasher.h
-//116 lines
+//119 lines
 #include <stdlib.h>
 #include <stdio.h> 
 #include <string.h>
@@ -8,7 +8,7 @@
 
 void process(int);
 
-void get_hash_of(char * message, char * info, struct connection C){
+/*void get_hash_of(char * message, char * info, struct connection C){
    FILE * hash;
    FILE * transfer;
    hash = fopen("US_TEXT.txt", "w+");
@@ -21,17 +21,17 @@ void get_hash_of(char * message, char * info, struct connection C){
     process(3);
    transfer = fopen("transfer_PtoC.txt", "r");
    int i = 0;
-   /*for(int b = 0; b < 32; b++){
+   for(int b = 0; b < 32; b++){
         ch = fgetc(transfer);
         data[i] = ch;
         i++;
    }
-    */
+    
  info = data;
     fclose(transfer);
 
 }
-
+*/
 
 char global_array_forhash[32];
 int pointofGAFA = 0;
@@ -51,7 +51,7 @@ int run_get_hash_of(char * info){
     char ch;
     //  puts("coming from run_get_hash_of");
     char zero = (char) 48;
-    process(1);
+    //process(1);
     //system("sync; sync; sync; sync; sync");
     //puts("hello");
     //char *ZERO = *zero
@@ -63,8 +63,11 @@ int run_get_hash_of(char * info){
     
     int gh = 0;
     int prev = 0;
-    //puts("getting info");
+    puts("Getting info");
+    
     char *ata = (char *) hash(info);
+    
+    puts("Done");
     for(int b = 0; b < 32; b++){
     
         

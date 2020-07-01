@@ -41,9 +41,10 @@ char n0 =  *message;
         send_data(l); //send character to txt file
 
     }
-     
+     puts("Hashing..");
      returner = run_get_hash_of(output);
      puts(output);
+     puts("Done...");
      
      //char *data_string_ah = (char*) malloc(48 * sizeof(char));
      

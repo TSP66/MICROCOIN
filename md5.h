@@ -29,7 +29,7 @@ char *md5(const char *str, int length) {
         length -= 512;
         str += 512;
     }
-
+    
     MD5_Final(digest, &c);
 
     for (n = 0; n < 16; ++n) {
@@ -40,9 +40,12 @@ char *md5(const char *str, int length) {
 }
 
 const char *hash(char * input){
-    char *output = md5("hello", strlen("hello"));
+    char *output = md5(input, strlen(input));
     printf("%s\n", output);
+    
     const char * outer = output;
+    
     free(output);
     return(outer);
+    
 }
