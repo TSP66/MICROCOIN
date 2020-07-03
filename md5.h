@@ -8,6 +8,7 @@
 #define COMMON_DIGEST_FOR_OPENSSL
 #include <CommonCrypto/CommonDigest.h>
 
+const int charactersMD5 = 32;
 
 // for windows: #include <openssl/md5.h>
 
@@ -39,8 +40,13 @@ char *md5(const char *str, int length) {
     return out;
 }
 
-const char *hash(char * input){
-    char *output = md5(input, strlen(input));
+const char * hash(char * input){
+    
+    char *output;
+    output = (char *) malloc(charactersMD5*sizeof(char));
+    
+    output = md5(input, strlen(input));
+    
     printf("%s\n", output);
     
     const char * outer = output;

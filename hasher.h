@@ -64,8 +64,9 @@ int run_get_hash_of(char * info){
     int gh = 0;
     int prev = 0;
     puts("Getting info");
-    
-    char *ata = (char *) hash(info);
+    char * ata;
+    ata = (char *) malloc(charactersMD5*sizeof(char));
+    ata = (char *) hash(info);
     
     puts("Done");
     for(int b = 0; b < 32; b++){

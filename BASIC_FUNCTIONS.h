@@ -32,17 +32,22 @@ char n0 =  *message;
     //clear_data();
      int pd = 0;
      int zero_counter = 0;
+     char stringtobehashed[55];
+     
     for(int i = 9;i<66;i++){
         
         char l = *(message + i);
         if(l == *ENDCHAR) break;
+        stringtobehashed[(i-9)] = l;
         //if(l == *ENDCHAR2) break;
         
-        send_data(l); //send character to txt file
+         //send character to txt file
 
     }
+     char *pointertobehashed = stringtobehashed;
      puts("Hashing..");
-     returner = run_get_hash_of(output);
+     
+     returner = run_get_hash_of(pointertobehashed);
      puts(output);
      puts("Done...");
      
