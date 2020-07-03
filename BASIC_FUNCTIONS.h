@@ -47,9 +47,9 @@ char n0 =  *message;
      char *pointertobehashed = stringtobehashed;
      puts("Hashing..");
      
-     returner = run_get_hash_of(pointertobehashed);
-     puts(output);
-     puts("Done...");
+    returner = run_get_hash_of(pointertobehashed);
+  
+    // puts("Done...");
      
      //char *data_string_ah = (char*) malloc(48 * sizeof(char));
      
@@ -69,7 +69,7 @@ char n0 =  *message;
      
      
  }
-        printf("%d", returner);
+  //  const char * returner = pointertobehashed;
         return returner;
   //puts("verfied");
 }

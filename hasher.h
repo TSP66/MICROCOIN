@@ -102,11 +102,8 @@ int run_get_hash_of(char * info){
         
     }
      
-     
-*/
-    puts("");
+     */
     puts(ata);
-    info = ata;
     return(returner);
 }
 void process(int time){

@@ -47,7 +47,7 @@ const char * hash(char * input){
     
     output = md5(input, strlen(input));
     
-    printf("%s\n", output);
+    //printf("%s\n", output);
     
     const char * outer = output;
     

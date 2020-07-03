@@ -162,7 +162,8 @@ int main(int argc , char *argv[])
 			
 		//else its some IO operation on some other socket 
 		for (i = 0; i < max_clients; i++) 
-		{ 
+		{
+            //char * DATA;
 			sd = client_socket[i]; 
 				
 			if (FD_ISSET( sd , &readfds)) 
@@ -184,20 +185,23 @@ int main(int argc , char *argv[])
 				else
 				{
 					//buffer[valread] = '\0';
-                    char * DATA = buffer;
-                    push(theStack, DATA);
+                    char * DATaa;
+                    DATaa = buffer;
+                    push(theStack, DATaa);
                     
-                   if ( (char *) strstr((const char *) DATA, "verify") != (char) 0)
+                   if ( (char *) strstr((const char *) DATaa, "verify") != (char) 0)
                            {
-                               char * d = DATA+7;
+                               char * d = DATaa+7;
                                int difficulty = (int) *d;
                                difficulty = difficulty - 48;
                                
                                puts("verifying");
-                               int n_of_zeros = verify(DATA);
+                               int n_of_zeros = verify(DATaa);
                                
                               if(difficulty == n_of_zeros) puts("confirmed");
                               else puts("not confirmed: not enough zeros");
+                               
+                               
                                
                                //clear(SOCKETS[socket_number]);
                                
@@ -205,8 +209,10 @@ int main(int argc , char *argv[])
                            }
 
 					//send(sd , buffer , strlen(buffer) , 0 );*/
-				} 
-			} 
+                    memset(DATaa,0,strlen(DATaa));
+                        }
+			}
+            
 		} 
 	} 
 		
