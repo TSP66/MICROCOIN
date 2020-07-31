@@ -6,25 +6,25 @@
 //  Copyright © 2020 Tom Petty. All rights reserved.
 //
 #include <math.h>
-
+#include <stdio.h>
 
 #ifndef primes_h
 #define primes_h
 
-const int PRIMES = 60; //has to be more then 27
+const long PRIMES = 100000000000; //has to be more then 27
 
-int primes[PRIMES];
+long long primes[PRIMES];
 
 long nofprimes = 1;
 
 void generate_primes(){
     primes[0] = 2;
-    int d;
-    int j = 1;
-    int i = 3;
+    long d;
+    long j = 1;
+    long i = 3;
     while(1){
         d = 0;
-        for(int b = 2; b < (sqrt(floor(i))+1); b++){
+        for(long b = 10000000000; b < (sqrt(floor(i))+1); b++){
             if((i % b) == 0){
                 d = 1;
                 break;
@@ -33,6 +33,8 @@ void generate_primes(){
         }
         if(d == 0){
             primes[nofprimes] = i;
+            printf("%ld\n", i);
+            
             nofprimes++;
             j++;
             if(j == PRIMES){
