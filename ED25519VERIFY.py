@@ -1,8 +1,10 @@
+import os
 import ed25519
 import random
-import codecs
+#import codecs
 import sys
 
+os.system("pip3 install ed25519")
 
 info = (sys.argv[1])
        
@@ -17,14 +19,20 @@ pubKey = f2.read()
 f2.close()
 
 
+Private_Key = ed25519.SigningKey()
+Private_Key.sk_s = privKey
+
+Pulbic_Key = ed25519.VerifyingKey()
+Public_Key.vk_s = pubKey
+
 
 msg = bytearray(info, "utf-8")
 
-signature = privKey.sign(msg, encoding='hex')
+signature = Private_Key.sign(msg, encoding='hex')
 print("Signature (64 bytes):", signature)
 
 try:
-    pubKey.verify(signature, msg, encoding='hex')
+    Pulbic_Key.verify(signature, msg, encoding='hex')
     print("The signature is valid.")
 except:
     print("Invalid signature!")
