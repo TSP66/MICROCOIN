@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <stdio.h> 
 #include <string.h>
-
 #include "md5.h"
 
 void process(int);
@@ -63,12 +62,13 @@ int run_get_hash_of(char * info){
     
     int gh = 0;
     int prev = 0;
-    puts("Getting info");
+   // puts("Getting info");
     char * ata;
-    ata = (char *) malloc(charactersMD5*sizeof(char));
-    ata = (char *) hash(info);
+    ata = (char *) malloc(32*sizeof(char));
+    ata = (char *) md5(info, 256);
     
-    puts("Done");
+    
+   // puts("Done");
     for(int b = 0; b < 32; b++){
     
         
@@ -90,7 +90,7 @@ int run_get_hash_of(char * info){
        
 
     }
-    puts("Gotten info");
+//    puts("Gotten info");
    // fclose(transfer);
    // puts("Closen text file");
     /*for(int i = 0;i<20;i++){
@@ -103,7 +103,7 @@ int run_get_hash_of(char * info){
     }
      
      */
-    puts(ata);
+   // puts(ata);
     return(returner);
 }
 void process(int time){

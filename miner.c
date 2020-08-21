@@ -1,11 +1,18 @@
 //miner.c
 #include <stdio.h> 
-#include <time.h> 
+#include <time.h>
+#include <stdlib.h>
 #include "coin.h"
+#include "hasher.h"
 #include <math.h>
 
-char block[193];
+char block[256];
+
+
 int split(long long time, int digit);
+int get_digits(int num);
+int internal_get_digits(int number, int point);
+int Randoms(int lower, int upper);
 
 char *senders_address = "016ac903ed60e3b2daf89610ba1c64c8544df759bdd5218eb4bd95cc450d9db8";
 
@@ -149,10 +156,28 @@ int main ()
      
     
     block[192] = *SEPERATOR;
+    long long ses = (long long) time(NULL);
+    for(int ff = 0; ff < 10000000; ff++){
+        
+        
+        srand(ff);
+       
+        int j = 193;
+        for(int zz = 193; zz<256; zz++){
+            sprintf(&block[zz], "%x", Randoms(0,15));
+        }
+        
+        int d = run_get_hash_of(block);
+        if(d == 6){
+            printf("Yeah");
+            long long ses2 = time(NULL) - ses;
+            printf("%lld", ses2);
+            break;
+        }
+        
+    }
     
-    
-    
-    printf("%s", block);
+ 
     return(0);
 }
 
@@ -165,3 +190,21 @@ int split(long long time, int digit){
     
     return(split(push, digit-1));
 }
+int get_digits(int num){
+    return (internal_get_digits(num, 0));
+}
+int internal_get_digits(int number, int point){ //function only for internal use
+    if(floor(number/10) < 2){
+        return point;
+    }
+    else{
+        return(internal_get_digits(floor(number/10), point++));
+    }
+}
+int Randoms(int lower, int upper)
+{
+   int num = (rand() %(upper - lower + 1)) + lower;
+   return(num);
+
+}
+  
