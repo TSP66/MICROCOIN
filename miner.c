@@ -157,7 +157,7 @@ int main ()
     
     block[192] = *SEPERATOR;
     long long ses = (long long) time(NULL);
-    for(int ff = 0; ff < 10000000; ff++){
+    for(unsigned long long ff = 0; ff < 100000000000; ff++){
         
         
         srand(ff);
@@ -168,7 +168,7 @@ int main ()
         }
         
         int d = run_get_hash_of(block);
-        if(d == 6){
+        if(d == 7){
             printf("Yeah");
             long long ses2 = time(NULL) - ses;
             printf("%lld", ses2);
