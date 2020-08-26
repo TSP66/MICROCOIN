@@ -1,10 +1,11 @@
 import os
-import ed25519
-import random
-#import codecs
+from nacl.encoding import HexEncoder
+from nacl.signing import SigningKey
+from nacl.signing import VerifyKey
+import codecs
 import sys
 
-os.system("pip3 install ed25519")
+#os.system("pip3 install ed25519")
 
 info = (sys.argv[1])
        
@@ -13,26 +14,19 @@ info = (sys.argv[1])
 
 f1 = open("PRIVATE_KEY.txt", "r")
 privKey = f1.read()
+print(privKey)
 f1.close()
 f2 = open("PUBLIC_KEY.txt", "r")
 pubKey = f2.read()
+print(pubKey)
 f2.close()
 
 
-Private_Key = ed25519.SigningKey()
-Private_Key.sk_s = privKey
+Private_Key = SigningKey(privKey, encoder = HexEncoder)
 
-Pulbic_Key = ed25519.VerifyingKey()
-Public_Key.vk_s = pubKey
+#https://stackoverflow.com/questions/62049349/sign-and-verify-using-ed25519-in-near-protocol
+
+Pulbic_Key = VerifyKey(pubKey, encoder=HexEncoder)
 
 
-msg = bytearray(info, "utf-8")
 
-signature = Private_Key.sign(msg, encoding='hex')
-print("Signature (64 bytes):", signature)
-
-try:
-    Pulbic_Key.verify(signature, msg, encoding='hex')
-    print("The signature is valid.")
-except:
-    print("Invalid signature!")
