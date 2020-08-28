@@ -4,6 +4,7 @@ from nacl.signing import SigningKey
 from nacl.signing import VerifyKey
 import codecs
 import sys
+import pickle 
 
 #os.system("pip3 install ed25519")
 
@@ -28,5 +29,12 @@ Private_Key = SigningKey(privKey, encoder = HexEncoder)
 
 Pulbic_Key = VerifyKey(pubKey, encoder=HexEncoder)
 
+redoneinfo = bytes(info, encoding = 'utf-8')
 
+print(str(redoneinfo))
 
+signing = Private_Key.sign(redoneinfo)
+
+f3 = open("SIGNATURE.txt", "wb")
+f3.write(signing)
+f3.close()
