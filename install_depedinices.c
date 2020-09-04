@@ -3,6 +3,7 @@
 int main(){
    //system("pip3 install --upgrade pip");
    //system("pip3 install pycrytodome");
-   system("pip3 install ed25519");
+   //system("pip3 install ed25519");
+    system("git clone https://github.com/orlp/ed25519");
    return 0;
 }

@@ -35,6 +35,8 @@ print(str(redoneinfo))
 
 signing = Private_Key.sign(redoneinfo)
 
-f3 = open("SIGNATURE.txt", "wb")
-f3.write(signing)
+print(signing)
+
+f3 = open("SIGNATURE.txt", "w")
+f3.write(str(signing))
 f3.close()
